@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components -- хук рядом с ThemeProvider */
 // utils/providers/ThemeProvider.tsx
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 

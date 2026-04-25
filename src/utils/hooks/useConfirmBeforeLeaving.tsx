@@ -6,7 +6,7 @@ export const useConfirmBeforeLeaving = (isDirty: boolean) => {
             window.history.pushState(null, document.title, window.location.href)
         }
 
-        const handleBeforeUnload = (event: any) => {
+        const handleBeforeUnload = (event: BeforeUnloadEvent) => {
             if (isDirty) {
                 event.preventDefault()
                 event.returnValue =

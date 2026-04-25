@@ -1,5 +1,5 @@
 import axios from 'axios'
-import useSWR, { mutate } from 'swr'
+import useSWR, { mutate, type SWRConfiguration } from 'swr'
 export { mutate } from 'swr'
 
 const $host = axios.create({
@@ -49,7 +49,7 @@ async function fetcher(url: string) {
     return data
 }
 
-export function useApi<T>(url: string, options?: any) {
+export function useApi<T>(url: string, options?: SWRConfiguration<T>) {
     const { data, error, mutate, isLoading } = useSWR<T>(url, fetcher, options)
     return {
         loading: !error && !data,

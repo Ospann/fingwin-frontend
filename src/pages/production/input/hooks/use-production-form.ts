@@ -2,14 +2,25 @@ import { Form, message } from 'antd'
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { createProduction, updateProduction } from '@/utils/services/production.service'
+import type { PurchaseType } from '@/utils/types/purchase.types'
 import { fetchPurchaseById } from '@/utils/services/purchase.service'
 import { mutate, useApi } from '@/utils/services'
 import { ProductType } from '@/utils/services/product.service'
 import { useTranslation } from 'react-i18next'
 import dayjs from 'dayjs'
+import type { Dayjs } from 'dayjs'
 import type { StorageType } from '@/utils/services/storage.service'
 
-const DEFAULT = {
+export type ProductionProductRow = {
+    id: number | null
+    name: string
+    quantity: number | null
+    uom: string
+    price: number | null
+    total: number | null
+}
+
+const DEFAULT: ProductionProductRow = {
     id: null,
     name: '',
     quantity: null,
@@ -18,13 +29,19 @@ const DEFAULT = {
     total: null,
 }
 
+type ProductionFormValues = {
+    date?: Dayjs
+    storage?: number
+    products?: ProductionProductRow[]
+}
+
 export function useProductionForm() {
     const { t } = useTranslation()
     const { id } = useParams()
     const navigate = useNavigate()
     const [form] = Form.useForm()
     const [isSubmitting, setIsSubmitting] = useState(false)
-    const [fields, setFields] = useState<any[]>([DEFAULT])
+    const [fields, setFields] = useState<ProductionProductRow[]>([DEFAULT])
 
     const { data: productsRes } = useApi<{ data: ProductType[] }>('product')
     const { data: storageRes } = useApi<{ data: StorageType[] }>('storage')
@@ -81,15 +98,15 @@ export function useProductionForm() {
 
         const currentProducts = form.getFieldValue('products') || []
         form.setFieldsValue({
-            products: currentProducts.filter((_: any, i: number) => i !== index),
+            products: currentProducts.filter((_: ProductionProductRow, i: number) => i !== index),
         })
     }
 
-    const handleSendForm = async (values: any) => {
+    const handleSendForm = async (values: ProductionFormValues) => {
         const formData = {
             ...values,
             date: values.date?.format('YYYY-MM-DD'),
-            products: values.products?.filter((p: any) => p.id) || [],
+            products: values.products?.filter((p: ProductionProductRow) => p.id) || [],
         }
 
         if (!formData.date || !formData.storage) {
@@ -101,7 +118,8 @@ export function useProductionForm() {
         const hide = message.loading(t('Загрузка...'), 0)
 
         try {
-            id ? await updateProduction(+id, formData) : await createProduction(formData)
+            const payload = formData as PurchaseType
+            id ? await updateProduction(+id, payload) : await createProduction(payload)
 
             hide()
             message.success(t('Успешно сохранено'))

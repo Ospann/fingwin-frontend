@@ -2,6 +2,7 @@ import { useEffect, useCallback, useState } from 'react'
 import { Form } from 'antd'
 import { useNavigate, useParams } from 'react-router-dom'
 import dayjs from 'dayjs'
+import type { Dayjs } from 'dayjs'
 import { mutate, useApi } from '@/utils/services'
 import { createReturn, updateReturn } from '@/utils/services/return.service'
 import type { ReturnType } from '@/utils/types/sales.types'
@@ -12,6 +13,10 @@ import type { FinanceAccountType } from '@/utils/types/finance.types'
 import { useTranslation } from 'react-i18next'
 import type { productListType } from '../../input/hooks/use-sales-form'
 import { MessageInstance } from 'antd/es/message/interface'
+
+type ReturnFormValues = Omit<ReturnType, 'date'> & { date: Dayjs | null }
+
+type ReturnProductRow = NonNullable<ReturnType['products']>[number]
 
 const DEFAULT: productListType = {
     id: null,
@@ -83,7 +88,7 @@ export const useReturnForm = (messageApi: MessageInstance) => {
         setTotal(totalSum)
     }
 
-    const onSubmit = async (formData: any) => {
+    const onSubmit = async (formData: ReturnFormValues) => {
         const filteredProducts = fields.filter((f) => f.id !== null)
 
         if (!formData.client || !formData.date || filteredProducts.length === 0) {
@@ -91,10 +96,10 @@ export const useReturnForm = (messageApi: MessageInstance) => {
         }
 
         // Преобразуем dayjs объект в строку для отправки на сервер
-        const submitData = {
+        const submitData: ReturnType = {
             ...formData,
-            date: formData.date ? dayjs(formData.date).format('YYYY-MM-DD') : null,
-            products: filteredProducts,
+            date: formData.date ? dayjs(formData.date).format('YYYY-MM-DD') : '',
+            products: filteredProducts as ReturnType['products'],
         }
 
         const response = id ? updateReturn(+id, submitData) : createReturn(submitData)
@@ -123,13 +128,13 @@ export const useReturnForm = (messageApi: MessageInstance) => {
             form.setFieldsValue(formData)
             if (data.data.products) {
                 setFields([
-                    ...data.data.products.map((p) => ({
-                        id: (p as any).id ?? null,
-                        name: (p as any).name ?? '',
-                        quantity: (p as any).quantity ?? null,
-                        uom: (p as any).uom ?? '',
-                        price: (p as any).price ?? null,
-                        total: (p as any).total ?? null,
+                    ...data.data.products.map((p: ReturnProductRow) => ({
+                        id: p.id ?? null,
+                        name: p.name ?? '',
+                        quantity: p.quantity ?? null,
+                        uom: p.uom ?? '',
+                        price: p.price ?? null,
+                        total: p.total ?? null,
                     })),
                     DEFAULT,
                 ])

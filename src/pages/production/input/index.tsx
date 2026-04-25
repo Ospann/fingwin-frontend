@@ -2,12 +2,11 @@ import { Helmet } from 'react-helmet'
 import { Typography, Input, Table, Button, DatePicker, Select, Form, Layout } from 'antd'
 import { DeleteOutlined } from '@ant-design/icons'
 import { useTranslation } from 'react-i18next'
-import { useProductionForm } from './hooks/use-production-form'
+import { useProductionForm, type ProductionProductRow } from './hooks/use-production-form'
 import { PURCHASE_HISTORY_ROUTE } from '@/utils/routes/routes.consts'
 import classes from './index.module.css'
 import Breadcrumbs from '@/components/layout/Breadcrumbs'
 import type { ColumnsType } from 'antd/es/table'
-import { ProductType } from '@/utils/services/product.service'
 
 const { Content } = Layout
 const { Title } = Typography
@@ -27,7 +26,7 @@ export default function Production() {
         storage,
     } = useProductionForm()
 
-    const columns: ColumnsType<ProductType> = [
+    const columns: ColumnsType<ProductionProductRow> = [
         {
             title: t('Наименование'),
             dataIndex: 'name',

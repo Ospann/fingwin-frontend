@@ -1,4 +1,6 @@
 import { Layout, Card, Typography } from 'antd'
+import type { CustomIconComponentProps } from '@ant-design/icons/lib/components/Icon'
+import type { ForwardRefExoticComponent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { MenuItems } from '@/utils/constants/menu.consts'
 import { Helmet } from 'react-helmet'
@@ -44,7 +46,9 @@ export default function Module() {
                             <div className={classes.cardBody}>
                                 <Icon
                                     style={{ fontSize: 52 }}
-                                    component={page.icon as React.ForwardRefExoticComponent<any>}
+                                    component={
+                                        page.icon as ForwardRefExoticComponent<CustomIconComponentProps>
+                                    }
                                 />
                                 <Title level={5}>{t(page.label)}</Title>
                             </div>

@@ -10,18 +10,23 @@ export type FinanceData = {
     details: { [key: string]: { [key: string]: number } }
 }
 
-export function isFinanceData(value: any): value is FinanceData {
-    return (
-        value !== null &&
-        typeof value === 'object' &&
-        typeof value.data === 'object' &&
-        !Array.isArray(value.data) &&
-        Object.keys(value.data).every(
-            (key) => typeof value.data[key] === 'number' || typeof value.data[key] === 'string',
-        ) &&
-        typeof value.details === 'object' &&
-        !Array.isArray(value.details)
-    )
+export function isFinanceData(value: unknown): value is FinanceData {
+    if (value === null || typeof value !== 'object' || !('data' in value) || !('details' in value)) {
+        return false
+    }
+    const { data, details } = value as { data: unknown; details: unknown }
+    if (typeof data !== 'object' || data === null || Array.isArray(data)) {
+        return false
+    }
+    const dataRecord = data as Record<string, unknown>
+    if (
+        !Object.keys(dataRecord).every(
+            (key) => typeof dataRecord[key] === 'number' || typeof dataRecord[key] === 'string',
+        )
+    ) {
+        return false
+    }
+    return typeof details === 'object' && details !== null && !Array.isArray(details)
 }
 
 export function useCashFlowReport() {

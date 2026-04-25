@@ -21,8 +21,7 @@ export function useUserList() {
 
     const confirmDelete = async () => {
         if (selectedUser) {
-            const responsePromise: Promise<any> = deleteUser(selectedUser.id)
-            await responsePromise
+            await deleteUser(selectedUser.id)
             mutate()
         }
         setSelectedUser(undefined)

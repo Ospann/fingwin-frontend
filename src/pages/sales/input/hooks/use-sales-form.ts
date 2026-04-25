@@ -21,6 +21,8 @@ export type productListType = {
     total: number | null
 }
 
+type SalesProductRow = NonNullable<SalesType['products']>[number]
+
 const DEFAULT_PRODUCT: productListType = {
     id: null,
     name: '',
@@ -131,13 +133,13 @@ export const useSalesForm = (messageApi: MessageInstance) => {
             form.setFieldsValue(formData)
             if (data.data.products) {
                 setProductList([
-                    ...data.data.products.map((p) => ({
-                        id: (p as any).id ?? null,
-                        name: (p as any).name ?? '',
-                        quantity: (p as any).quantity ?? null,
-                        uom: (p as any).uom ?? '',
-                        price: (p as any).price ?? null,
-                        total: (p as any).total ?? null,
+                    ...data.data.products.map((p: SalesProductRow) => ({
+                        id: p.id ?? null,
+                        name: p.name ?? '',
+                        quantity: p.quantity ?? null,
+                        uom: p.uom ?? '',
+                        price: p.price ?? null,
+                        total: p.total ?? null,
                     })),
                     DEFAULT_PRODUCT,
                 ])

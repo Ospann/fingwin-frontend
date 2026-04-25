@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components -- хук рядом с ContextProvider */
 import { createContext, useContext, useState, ReactNode } from 'react'
 import { UserRoles } from '../types/user.type'
 import decode from 'jwt-decode'
@@ -30,7 +31,7 @@ export function ContextProvider({ children }: Readonly<{ children: ReactNode }>)
 
     const setToken = (token: string) => {
         localStorage.setItem('authToken', token)
-        const decoded: any = decode(token)
+        const decoded = decode<UserType>(token)
         setUser(decoded)
     }
     return (
