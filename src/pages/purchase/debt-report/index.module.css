@@ -1,0 +1,25 @@
+.container {
+    width: 100%;
+    padding: 2rem 4rem;
+    align-items: flex-end;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.searchContainer {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+}
+
+.searchInput {
+    border-radius: 5px;
+}
+
+.upcontainer {
+    width: 100%;
+    justify-content: space-between;
+    display: flex;
+    margin: 1rem 0;
+}

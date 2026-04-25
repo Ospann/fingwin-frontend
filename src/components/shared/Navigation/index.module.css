@@ -1,0 +1,48 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+.cardBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+    min-height: 150px;
+    cursor: pointer;
+}
+
+.cardBody :global(.ant-typography) {
+    transition: color 0.3s ease;
+}
+
+.hoverable:hover .cardBody,
+.hoverable:hover .cardBody :global(.ant-typography) {
+    color: var(--ant-primary-color);
+}
+
+.hidden {
+    display: none !important;
+}
+
+@media screen and (max-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

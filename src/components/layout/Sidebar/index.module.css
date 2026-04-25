@@ -1,0 +1,40 @@
+.button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: 0.2rem;
+    height: auto;
+    color: inherit; /* важно, чтобы цвет наследовался */
+    transition: color 0.2s ease;
+}
+
+.icon {
+    font-size: 22px;
+    transition: color 0.2s ease;
+}
+
+/* Цвета для темы */
+.light .icon {
+    color: #222;
+}
+.dark .icon {
+    color: #fff;
+}
+
+/* Ховер */
+.button:hover {
+    color: var(--ant-primary-color); /* цвет кнопки и текста */
+}
+
+.button:hover .icon {
+    color: var(--ant-primary-color); /* цвет иконки при наведении */
+}
+
+.button:hover .iconText {
+    color: var(--ant-primary-color); /* цвет иконки при наведении */
+}
+
+.iconText {
+    font-size: 9px;
+}

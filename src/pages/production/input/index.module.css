@@ -1,0 +1,31 @@
+.container {
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    gap: 1rem;
+    height: 100%;
+    position: relative;
+}
+
+.upblock {
+    display: flex;
+    gap: 1rem;
+    z-index: 100;
+    flex-direction: row;
+    padding: 1rem;
+    border-radius: 5px;
+    background-color: var(--ant-layout-footer-background);
+}
+
+.buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.table td {
+    padding: 5px;
+}
+
+.table th {
+    padding: 0.8rem;
+}

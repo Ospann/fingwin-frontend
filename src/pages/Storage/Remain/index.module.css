@@ -1,0 +1,34 @@
+.upcontainer {
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    margin: 1rem 0;
+}
+
+.rightBlock {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+
+.searchContainer {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+}
+
+.searchInput {
+    z-index: 3;
+}
+
+.mainsearchInput {
+    z-index: 4;
+}
+
+@media (max-width: 768px) {
+    .upcontainer {
+        gap: 1rem;
+        flex-direction: column;
+    }
+}

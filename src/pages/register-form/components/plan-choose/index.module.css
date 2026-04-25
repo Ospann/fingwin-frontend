@@ -1,0 +1,50 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+}
+
+.plan {
+    border: 2px solid #e5e5e5;
+    border-radius: 10px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.plan:hover {
+    border-color: #52c41a;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.selected {
+    border-color: #52c41a;
+    box-shadow: 0 0 0 2px rgba(82, 196, 26, 0.2);
+}
+
+.title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #111;
+    margin-bottom: 4px;
+}
+
+.subtitle {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.price {
+    font-size: 20px;
+    font-weight: 700;
+    color: #52c41a;
+    margin-bottom: 12px;
+}
+
+.features {
+    color: #333;
+    font-size: 14px;
+    line-height: 1.5;
+}

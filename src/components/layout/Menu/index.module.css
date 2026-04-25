@@ -1,0 +1,41 @@
+.drawerBody {
+    display: flex;
+    padding: 2rem;
+    gap: 0.5rem;
+    flex-direction: column;
+}
+
+.menuBox {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1.2rem;
+    text-align: start;
+}
+
+.menuLink {
+    width: 60%;
+    line-height: 20px;
+    font-weight: 600;
+    position: relative;
+    text-decoration: none;
+}
+
+.menuLink:hover {
+    text-decoration: underline;
+}
+
+.title {
+    align-items: center;
+    display: flex;
+    cursor: pointer;
+}
+
+.submenu {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1.2rem;
+    text-align: start;
+    padding-left: 2rem;
+}

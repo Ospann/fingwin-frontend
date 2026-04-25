@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    gap: 1rem;
+}
+
+.upContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.chartContainer {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    flex: 1;
+    justify-content: space-between;
+}
+
+.tableContainer {
+    flex: 1;
+    width: 50%;
+}

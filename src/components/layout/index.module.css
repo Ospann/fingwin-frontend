@@ -1,0 +1,10 @@
+.content {
+    padding: 1rem 3rem;
+    min-height: 90dvh;
+}
+
+@media (max-width: 768px) {
+    .content {
+        padding: 1rem;
+    }
+}
